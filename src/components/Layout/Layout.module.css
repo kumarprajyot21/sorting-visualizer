@@ -1,0 +1,7 @@
+.section {
+  text-align: center;
+  margin: auto;
+  width: 90%;
+  max-width: 50rem;
+  position: relative;
+}

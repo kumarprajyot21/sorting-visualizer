@@ -1,0 +1,10 @@
+.bar {
+  flex-grow: 1;
+  background-color: #45a29e;
+  border: 1px solid #0b0c10;
+  margin: 0 0.15rem;
+}
+
+.bar span {
+  font-weight: bold;
+}
