@@ -1,29 +1,22 @@
 import React from 'react';
-import _ from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
-import { bubbleSort } from '../../utils/sortUtils';
-import { setIntervalX } from '../../utils/helperUtils';
+import { useParams, NavLink } from 'react-router-dom';
+import { sortArray } from '../../utils/sortUtils';
 import { ListActions } from '../../store/list-slice';
-import { SORT_DELAY, ARRAY_SIZE } from '../../constants';
+import { SORT_DELAY, ARRAY_SIZE, colors } from '../../constants';
 import classes from './MainHeader.module.css';
 
 function MainHeader() {
+  const params = useParams();
+  const { sortMethod } = params;
+
   const listData = useSelector((state) => state.list);
   const listSize = listData.length;
   const sortDelay = useSelector((state) => state.sortDelay);
   const dispatch = useDispatch();
 
   const sortHandler = () => {
-    const newData = _.cloneDeep(listData);
-    const newDataStates = bubbleSort(newData);
-    setIntervalX(
-      (midState) => {
-        dispatch(ListActions.setArray(midState));
-      },
-      newDataStates,
-      sortDelay,
-      newDataStates.length
-    );
+    dispatch(sortArray(sortMethod, sortDelay, listData));
   };
 
   const generateArrayHandler = () => {
@@ -39,7 +32,10 @@ function MainHeader() {
   };
 
   return (
-    <header className={classes.header}>
+    <header
+      className={classes.header}
+      style={{ backgroundColor: colors.header }}
+    >
       <div>
         <button onClick={generateArrayHandler}>Generate New Array</button>
         <label htmlFor='sizeChanger'>Array Size</label>
@@ -62,14 +58,19 @@ function MainHeader() {
         />
       </div>
       <div className={classes.sortUtils}>
-        <div className={classes.actions}>
-          <button onClick={sortHandler}>Sort</button>
-        </div>
-        <div>
-          <a href='/'>Bubble Sort</a>
-          <a href='/'>Merge Sort</a>
-          <a href='/'>Quick Sort</a>
-          <a href='/'>Heap Sort</a>
+        <button onClick={sortHandler} className={classes.sort}>
+          Sort
+        </button>
+        <span className={classes.joinBar}></span>
+        <div className={classes.sortMethods}>
+          <NavLink activeClassName={classes.active} to='/bubble-sort'>
+            Bubble Sort
+          </NavLink>
+          <NavLink activeClassName={classes.active} to='/merge-sort'>
+            Merge Sort
+          </NavLink>
+          <NavLink to='/'>Quick Sort</NavLink>
+          <NavLink to='/'>Heap Sort</NavLink>
         </div>
       </div>
     </header>

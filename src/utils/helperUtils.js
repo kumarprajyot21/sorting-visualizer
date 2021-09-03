@@ -21,3 +21,12 @@ export const generateRandomArray = (length) => {
     color: '#45a29e',
   }));
 };
+
+export const arrayMove = (arr, oldIndex, newIndex) => {
+  arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
+  return arr;
+};
+
+export const setColor = (objList, color) => {
+  objList.forEach((obj) => (obj.color = color));
+};

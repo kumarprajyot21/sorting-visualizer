@@ -1,7 +1,6 @@
 .header {
   display: flex;
   align-items: center;
-  background-color: #1f2833;
   justify-content: space-between;
   height: 4rem;
   color: white;
@@ -16,13 +15,59 @@
   color: white;
 }
 
+.header button.sort {
+  padding: 0.2rem 0.6rem;
+  border: 2px solid #aaabac;
+  color: #aaabac;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.header button.sort:hover {
+  border-color: #72eeb8;
+  background-color: #72eeb8;
+  color: #0b0c10;
+}
+
+.joinBar {
+  width: 2rem;
+  border: 1px solid #aaabac;
+}
+
+.header button.sort:hover + .joinBar {
+  border-color: #72eeb8;
+}
+
 .header a {
   text-decoration: none;
-  margin: 0 0.5rem;
-  color: white;
+  padding: 0.75rem 1rem;
+  color: #c5c6c7;
+  border: 1px solid #45a29e;
+  font-weight: 500;
+  border-right: 0;
+}
+
+.header a:first-of-type {
+  border-radius: 5px 0 0 5px;
+}
+
+.header a:last-of-type {
+  border-radius: 0 5px 5px 0;
+  border-right: 1px solid #45a29e;
+}
+
+.header a.active {
+  background-color: #45a29e;
+  color: #0b0c10;
+  cursor: default;
+}
+
+.header a:hover:not(.active) {
+  color: #66fcf1;
 }
 
 .sortUtils {
   display: flex;
   align-items: center;
+  margin-right: 1rem;
 }
