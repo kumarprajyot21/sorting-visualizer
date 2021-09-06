@@ -25,12 +25,19 @@
   cursor: not-allowed;
 }
 
-.header button.sort {
+.header button.sort,
+.header button.cancel {
   padding: 0.2rem 0.6rem;
   border: 2px solid #aaabac;
   color: #aaabac;
   margin: 0;
   vertical-align: middle;
+}
+
+.header button.cancel {
+  border: 2px solid #f98f8f;
+  background-color: #f98f8f;
+  color: #0b0c10;
 }
 
 .header button.sort:hover {
@@ -39,13 +46,27 @@
   color: #0b0c10;
 }
 
+.header button.cancel:hover {
+  border-color: red;
+  background-color: red;
+  color: white;
+}
+
 .joinBar {
   width: 2rem;
   border: 1px solid #aaabac;
 }
 
+.joinBarCancel {
+  border: 1px solid #f98f8f;
+}
+
 .header button.sort:hover + .joinBar {
   border-color: #72eeb8;
+}
+
+.header button.cancel:hover + .joinBar {
+  border-color: red;
 }
 
 .header a {

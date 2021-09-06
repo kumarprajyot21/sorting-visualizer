@@ -1,6 +1,7 @@
 import _ from 'lodash';
-import { setIntervalX } from './helperUtils';
+import { setIntervalX, setColor } from './helperUtils';
 import { ListActions } from '../store/list-slice';
+import { colors } from '../constants';
 import quickSort from './sort-methods/quickSort';
 import mergeSort from './sort-methods/mergeSort';
 import bubbleSort from './sort-methods/bubbleSort';
@@ -22,7 +23,7 @@ export const sortArray = (sortMethod, sortDelay, listData) => {
     }
 
     dispatch(ListActions.setIsSorting(true));
-    setIntervalX(
+    const interval = setIntervalX(
       (midState) => {
         dispatch(ListActions.setArray(midState));
       },
@@ -33,5 +34,17 @@ export const sortArray = (sortMethod, sortDelay, listData) => {
         dispatch(ListActions.setIsSorting(false));
       }
     );
+    dispatch(ListActions.setSortingInterval(interval));
+  };
+};
+
+export const cancelSorting = (interval, listData) => {
+  return (dispatch) => {
+    clearInterval(interval);
+    dispatch(ListActions.setIsSorting(false));
+
+    const newData = _.cloneDeep(listData);
+    setColor(colors.darkCyan, ...newData);
+    dispatch(ListActions.setArray(newData));
   };
 };

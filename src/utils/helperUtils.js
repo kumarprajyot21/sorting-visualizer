@@ -17,6 +17,8 @@ export const setIntervalX = (
       onComplete();
     }
   }, delay);
+
+  return interval;
 };
 
 export const generateRandomArray = (length) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
-import { sortArray } from '../../utils/sortUtils';
+import { sortArray, cancelSorting } from '../../utils/sortUtils';
 import { ListActions } from '../../store/list-slice';
 import { SORT_DELAY, ARRAY_SIZE, colors } from '../../constants';
 import Slider from '../UI/Slider';
@@ -14,7 +14,9 @@ function MainHeader() {
 
   const dispatch = useDispatch();
 
-  const isSorting = useSelector((state) => state.isSorting);
+  const isSorting = useSelector((state) => state.sortInterval.isSorting);
+  const sortInterval = useSelector((state) => state.sortInterval.interval);
+
   const listData = useSelector((state) => state.list);
   const listSize = listData.length;
   const sortDelay = useSelector((state) => state.sortDelay);
@@ -26,7 +28,11 @@ function MainHeader() {
     ) + '%';
 
   const sortHandler = () => {
-    dispatch(sortArray(sortMethod, sortDelay, listData));
+    if (!isSorting) {
+      dispatch(sortArray(sortMethod, sortDelay, listData));
+    } else {
+      dispatch(cancelSorting(sortInterval, listData));
+    }
   };
 
   const generateArrayHandler = () => {
@@ -78,12 +84,13 @@ function MainHeader() {
       <div className={classes.sortActions}>
         <button
           onClick={sortHandler}
-          className={classes.sort}
-          disabled={isSorting}
+          className={isSorting ? classes.cancel : classes.sort}
         >
-          {isSorting ? 'Sorting...' : 'Sort'}
+          {isSorting ? 'Cancel Sorting' : 'Sort'}
         </button>
-        <span className={classes.joinBar}></span>
+        <span
+          className={`${classes.joinBar} ${isSorting && classes.joinBarCancel}`}
+        ></span>
         <div className={classes.sortMethods}>
           <NavLink
             activeClassName={classes.active}
