@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 function BarsList() {
   const listData = useSelector((state) => state.list);
   const sortDelay = useSelector((state) => state.sortDelay);
-  const showNumber = listData.length <= 18;
   const animateList = sortDelay > 150;
 
   return (
@@ -19,7 +18,7 @@ function BarsList() {
               id={item.id}
               value={item.value}
               color={item.color}
-              showNumber={showNumber && item.value > 3}
+              listSize={listData.length}
             />
           ))}
         </ul>

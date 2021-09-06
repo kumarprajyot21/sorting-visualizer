@@ -5,3 +5,15 @@
   max-width: 60rem;
   position: relative;
 }
+
+@media (max-height: 20rem) {
+  .layout {
+    font-size: smaller;
+  }
+}
+
+@media (max-width: 35rem) {
+  .layout {
+    display: none;
+  }
+}

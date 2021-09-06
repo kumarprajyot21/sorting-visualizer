@@ -1,8 +1,8 @@
 .header {
   display: flex;
+  flex-direction: column-reverse;
   align-items: center;
-  justify-content: space-between;
-  height: 4rem;
+  justify-content: center;
   color: #aaabac;
   font-weight: 500;
 }
@@ -104,10 +104,22 @@
 .sortUtils {
   display: flex;
   align-items: center;
+  margin: 1rem 0;
 }
 
 .sortActions {
   display: flex;
   align-items: center;
-  margin-right: 1rem;
+  margin: 1rem 0;
+}
+
+@media (min-width: 68rem) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .header a:last-of-type {
+    margin-right: 1rem;
+  }
 }

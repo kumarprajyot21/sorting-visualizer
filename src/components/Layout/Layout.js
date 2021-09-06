@@ -4,10 +4,12 @@ import classes from './Layout.module.css';
 
 function Layout(props) {
   return (
-    <>
+    <div className={classes.layout}>
       <MainHeader />
-      <section className={classes.section}>{props.children}</section>
-    </>
+      <main>
+        <section className={classes.section}>{props.children}</section>
+      </main>
+    </div>
   );
 }
 
