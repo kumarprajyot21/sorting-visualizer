@@ -27,6 +27,6 @@ export const arrayMove = (arr, oldIndex, newIndex) => {
   return arr;
 };
 
-export const setColor = (objList, color) => {
+export const setColor = (color, ...objList) => {
   objList.forEach((obj) => (obj.color = color));
 };

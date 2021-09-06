@@ -1,0 +1,41 @@
+.dropdown {
+  position: relative;
+  margin: 0 0.5rem;
+}
+
+.dropdown .container {
+  position: absolute;
+  background-color: #1f2833;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #45a29e;
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.dropdownButton {
+  margin: 0;
+}
+
+.dropdownButton:hover {
+  color: #ccc;
+}
+
+.dropdownButton span {
+  margin-left: 0.25rem;
+}
+
+.dropdownButton .badge {
+  background-color: #45a29e;
+  border-radius: 4px;
+  padding: 4px 6px;
+  color: #0b0c10;
+}
+
+.dropdownButton:hover .badge {
+  background-color: #4bb1ac;
+}

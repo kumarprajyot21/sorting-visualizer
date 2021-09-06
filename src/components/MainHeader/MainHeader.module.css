@@ -3,16 +3,22 @@
   align-items: center;
   justify-content: space-between;
   height: 4rem;
-  color: white;
+  color: #aaabac;
+  font-weight: 500;
 }
 
-.header button {
+button {
   font: inherit;
   border: none;
   background-color: inherit;
   margin: 0 0.5rem;
   cursor: pointer;
-  color: white;
+  font-weight: 500;
+  color: #aaabac;
+}
+
+button:hover {
+  color: #ccc;
 }
 
 .header button.sort {
@@ -67,6 +73,11 @@
 }
 
 .sortUtils {
+  display: flex;
+  align-items: center;
+}
+
+.sortActions {
   display: flex;
   align-items: center;
   margin-right: 1rem;

@@ -19,7 +19,7 @@ function BarsList() {
               id={item.id}
               value={item.value}
               color={item.color}
-              showNumber={showNumber && item.value >= 3}
+              showNumber={showNumber && item.value > 3}
             />
           ))}
         </ul>

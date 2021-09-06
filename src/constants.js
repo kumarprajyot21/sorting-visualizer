@@ -5,7 +5,7 @@ export const SORT_DELAY = {
 
 export const ARRAY_SIZE = {
   MIN: 10,
-  MAX: 60,
+  MAX: 80,
 };
 
 export const ARRAY_VALUE = {
