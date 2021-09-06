@@ -7,7 +7,7 @@
   font-weight: 500;
 }
 
-button {
+.header button {
   font: inherit;
   border: none;
   background-color: inherit;
@@ -17,8 +17,12 @@ button {
   color: #aaabac;
 }
 
-button:hover {
+.header button:hover:not(:disabled) {
   color: #ccc;
+}
+
+.header button:disabled {
+  cursor: not-allowed;
 }
 
 .header button.sort {
@@ -53,6 +57,10 @@ button:hover {
   border-right: 0;
 }
 
+.header a.disabled {
+  cursor: not-allowed;
+}
+
 .header a:first-of-type {
   border-radius: 5px 0 0 5px;
 }
@@ -68,7 +76,7 @@ button:hover {
   cursor: default;
 }
 
-.header a:hover:not(.active) {
+.header a:hover:not(.active):not(.disabled) {
   color: #66fcf1;
 }
 

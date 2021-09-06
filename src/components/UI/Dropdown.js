@@ -23,6 +23,7 @@ function Dropdown(props) {
     >
       <button
         className={classes.dropdownButton}
+        disabled={props.disabled}
         style={{ color: showDropdwon ? '#66fcf1' : '' }}
       >
         {props.label}

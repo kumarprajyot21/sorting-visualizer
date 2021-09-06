@@ -1,6 +1,5 @@
 .dropdown {
   position: relative;
-  margin: 0 0.5rem;
 }
 
 .dropdown .container {
@@ -17,14 +16,6 @@
   z-index: 1;
 }
 
-.dropdownButton {
-  margin: 0;
-}
-
-.dropdownButton:hover {
-  color: #ccc;
-}
-
 .dropdownButton span {
   margin-left: 0.25rem;
 }
@@ -36,6 +27,6 @@
   color: #0b0c10;
 }
 
-.dropdownButton:hover .badge {
+.dropdownButton:hover:not(:disabled) .badge {
   background-color: #4bb1ac;
 }

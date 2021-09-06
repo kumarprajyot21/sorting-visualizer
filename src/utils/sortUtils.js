@@ -21,13 +21,17 @@ export const sortArray = (sortMethod, sortDelay, listData) => {
       heapSort(newData, newDataStates);
     }
 
+    dispatch(ListActions.setIsSorting(true));
     setIntervalX(
       (midState) => {
         dispatch(ListActions.setArray(midState));
       },
       newDataStates,
       sortDelay,
-      newDataStates.length
+      newDataStates.length,
+      () => {
+        dispatch(ListActions.setIsSorting(false));
+      }
     );
   };
 };

@@ -1,6 +1,12 @@
 import { ARRAY_VALUE } from '../constants';
 
-export const setIntervalX = (callback, callbackData, delay, repititions) => {
+export const setIntervalX = (
+  callback,
+  callbackData,
+  delay,
+  repititions,
+  onComplete
+) => {
   let count = 0;
   const interval = setInterval(() => {
     callback(callbackData[count]);
@@ -8,6 +14,7 @@ export const setIntervalX = (callback, callbackData, delay, repititions) => {
 
     if (count === repititions) {
       clearInterval(interval);
+      onComplete();
     }
   }, delay);
 };

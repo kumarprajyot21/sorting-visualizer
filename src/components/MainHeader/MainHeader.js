@@ -14,6 +14,7 @@ function MainHeader() {
 
   const dispatch = useDispatch();
 
+  const isSorting = useSelector((state) => state.isSorting);
   const listData = useSelector((state) => state.list);
   const listSize = listData.length;
   const sortDelay = useSelector((state) => state.sortDelay);
@@ -40,14 +41,20 @@ function MainHeader() {
     dispatch(ListActions.setDelay(+event.target.value));
   };
 
+  const linkClickHandler = (event) => {
+    if (isSorting) event.preventDefault();
+  };
+
   return (
     <header
       className={classes.header}
       style={{ backgroundColor: colors.header }}
     >
       <div className={classes.sortUtils}>
-        <button onClick={generateArrayHandler}>Generate New Array</button>
-        <Dropdown label='Array Size' badge={listSize}>
+        <button onClick={generateArrayHandler} disabled={isSorting}>
+          Generate New Array
+        </button>
+        <Dropdown label='Array Size' badge={listSize} disabled={isSorting}>
           <Slider
             min={ARRAY_SIZE.MIN}
             max={ARRAY_SIZE.MAX}
@@ -55,7 +62,11 @@ function MainHeader() {
             onChange={sizeChangeHandler}
           />
         </Dropdown>
-        <Dropdown label='Sort Speed' badge={sortSpeedPercent}>
+        <Dropdown
+          label='Sort Speed'
+          badge={sortSpeedPercent}
+          disabled={isSorting}
+        >
           <Slider
             min={SORT_DELAY.MIN}
             max={SORT_DELAY.MAX}
@@ -65,21 +76,45 @@ function MainHeader() {
         </Dropdown>
       </div>
       <div className={classes.sortActions}>
-        <button onClick={sortHandler} className={classes.sort}>
-          Sort
+        <button
+          onClick={sortHandler}
+          className={classes.sort}
+          disabled={isSorting}
+        >
+          {isSorting ? 'Sorting...' : 'Sort'}
         </button>
         <span className={classes.joinBar}></span>
         <div className={classes.sortMethods}>
-          <NavLink activeClassName={classes.active} to='/bubble-sort'>
+          <NavLink
+            activeClassName={classes.active}
+            onClick={linkClickHandler}
+            className={`${isSorting && classes.disabled}`}
+            to='/bubble-sort'
+          >
             Bubble Sort
           </NavLink>
-          <NavLink activeClassName={classes.active} to='/merge-sort'>
+          <NavLink
+            activeClassName={classes.active}
+            onClick={linkClickHandler}
+            className={`${isSorting && classes.disabled}`}
+            to='/merge-sort'
+          >
             Merge Sort
           </NavLink>
-          <NavLink activeClassName={classes.active} to='/quick-sort'>
+          <NavLink
+            activeClassName={classes.active}
+            onClick={linkClickHandler}
+            className={`${isSorting && classes.disabled}`}
+            to='/quick-sort'
+          >
             Quick Sort
           </NavLink>
-          <NavLink activeClassName={classes.active} to='/heap-sort'>
+          <NavLink
+            activeClassName={classes.active}
+            onClick={linkClickHandler}
+            className={`${isSorting && classes.disabled}`}
+            to='/heap-sort'
+          >
             Heap Sort
           </NavLink>
         </div>
