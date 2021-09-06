@@ -38,7 +38,7 @@ const heapify = (arr, root, heapSize, arrayStates) => {
 
 const heapSort = (arr, arrayStates) => {
   const heapSize = arr.length;
-  for (let i = heapSize / 2 - 1; i >= 0; i--) {
+  for (let i = Math.floor(heapSize / 2) - 1; i >= 0; i--) {
     heapify(arr, i, heapSize, arrayStates);
   }
 
