@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
 import { sortArray, cancelSorting } from '../../utils/sortUtils';
@@ -9,6 +9,7 @@ import Dropdown from '../UI/Dropdown';
 import classes from './MainHeader.module.css';
 
 function MainHeader() {
+  const headerRef = useRef();
   const params = useParams();
   const { sortMethod } = params;
 
@@ -16,6 +17,10 @@ function MainHeader() {
 
   const isSorting = useSelector((state) => state.sortInterval.isSorting);
   const sortInterval = useSelector((state) => state.sortInterval.interval);
+
+  const [maxAllowedArraySize, setMaxAllowedArraySize] = useState(
+    ARRAY_SIZE.MAX
+  );
 
   const listData = useSelector((state) => state.list);
   const listSize = listData.length;
@@ -26,6 +31,15 @@ function MainHeader() {
         (SORT_DELAY.MAX - SORT_DELAY.MIN)) *
         100
     ) + '%';
+
+  useEffect(() => {
+    if (headerRef.current.offsetWidth < 600)
+      setMaxAllowedArraySize(ARRAY_SIZE.MAX_600);
+    else if (headerRef.current.offsetWidth < 700)
+      setMaxAllowedArraySize(ARRAY_SIZE.MAX_700);
+    else if (headerRef.current.offsetWidth < 900)
+      setMaxAllowedArraySize(ARRAY_SIZE.MAX_900);
+  }, []);
 
   const sortHandler = () => {
     if (!isSorting) {
@@ -55,6 +69,7 @@ function MainHeader() {
     <header
       className={classes.header}
       style={{ backgroundColor: colors.header }}
+      ref={headerRef}
     >
       <div className={classes.sortUtils}>
         <button onClick={generateArrayHandler} disabled={isSorting}>
@@ -63,7 +78,7 @@ function MainHeader() {
         <Dropdown label='Array Size' badge={listSize} disabled={isSorting}>
           <Slider
             min={ARRAY_SIZE.MIN}
-            max={ARRAY_SIZE.MAX}
+            max={maxAllowedArraySize}
             value={listSize}
             onChange={sizeChangeHandler}
           />
